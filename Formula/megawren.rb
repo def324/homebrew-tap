@@ -46,11 +46,11 @@ class Megawren < Formula
     ENV.prepend_path "CMAKE_PREFIX_PATH", formula_opt_prefix("icu4c@79")
     ENV["BUILD_JOBS"] = ENV.make_jobs.to_s
     ENV["ZSTD_SYS_USE_PKG_CONFIG"] = "1"
-    system "./scripts/build-sdk.sh"
+    system "./scripts/build-sdk.sh", "-DCMAKE_INSTALL_PREFIX=#{libexec}", "-DCMAKE_INSTALL_LIBDIR=lib",
+                                    "-DCMAKE_INSTALL_INCLUDEDIR=#{sdk}/include"
+    (libexec/"lib").install Dir["target/sdk/lib/libSDKlib*"]
     system "./scripts/cargo.sh", "build", "--release", "--locked", "--offline"
-    (libexec/"sdk/lib").install Dir["target/sdk/lib/libSDKlib*"]
-    (libexec/"bin").install "target/release/megawren"
-    bin.install_symlink libexec/"bin/megawren"
+    bin.install "target/release/megawren"
     pkgshare.install "THIRD_PARTY_NOTICES.md"
     system "python3", "scripts/package.py", "--licenses-only", pkgshare/"licenses"
   end
