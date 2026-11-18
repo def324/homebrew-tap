@@ -11,12 +11,15 @@ class Megawren < Formula
   depends_on "cryptopp"
   depends_on "icu4c@79"
   depends_on "libsodium"
-  depends_on macos: :sequoia
   depends_on "zstd"
 
   uses_from_macos "python" => :build
   uses_from_macos "curl"
   uses_from_macos "sqlite"
+
+  on_macos do
+    depends_on macos: :sequoia
+  end
 
   on_linux do
     depends_on "openssl@3"
@@ -39,9 +42,9 @@ class Megawren < Formula
     sdk = buildpath/"vendor/mega"
     resource("mega-sdk").stage sdk
     ENV["MEGAWREN_SDK_SOURCE"] = sdk
-    ENV["CRYPTOPP_PREFIX"] = Formula["cryptopp"].opt_prefix
-    ENV.prepend_path "CMAKE_PREFIX_PATH", Formula["icu4c@79"].opt_prefix
-    ENV["BUILD_JOBS"] = ENV.make_jobs
+    ENV["CRYPTOPP_PREFIX"] = formula_opt_prefix("cryptopp")
+    ENV.prepend_path "CMAKE_PREFIX_PATH", formula_opt_prefix("icu4c@79")
+    ENV["BUILD_JOBS"] = ENV.make_jobs.to_s
     ENV["ZSTD_SYS_USE_PKG_CONFIG"] = "1"
     system "./scripts/build-sdk.sh"
     system "./scripts/cargo.sh", "build", "--release", "--locked", "--offline"
