@@ -5,6 +5,13 @@ class Megawren < Formula
   sha256 "7d4b659427c47a4c9924dd2171341e6f327bcb043dcd33e393df546a2810ba5d"
   license "MIT"
 
+  bottle do
+    root_url "https://github.com/def324/homebrew-tap/releases/download/megawren-0.1.0"
+    sha256 cellar: :any, arm64_tahoe:   "af6d7dab5173acdb022c84045ab41a93a9408522d6a218c3e254d1be02c1ceb5"
+    sha256 cellar: :any, arm64_sequoia: "df23358d38e690c07d9c8c4c6b97ff11dba68f2bf5fa6f58d24c4022d8abfdf9"
+    sha256 cellar: :any, x86_64_linux:  "ec259c347f4829d568f4fd2e6f1a07f7cd4acf2a308c40b130cd1e8d151d3681"
+  end
+
   depends_on "cmake" => :build
   depends_on "pkgconf" => :build
   depends_on "rust" => :build
