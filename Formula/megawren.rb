@@ -1,8 +1,8 @@
 class Megawren < Formula
   desc "Terminal file browser and transfer client for MEGA"
   homepage "https://github.com/def324/megawren"
-  url "https://github.com/def324/megawren/archive/refs/tags/v0.3.0.tar.gz"
-  sha256 "05edce6401e9c1d35f7e6672627575b591e6df766098a098b6682024dc7be39b"
+  url "https://github.com/def324/megawren/archive/refs/tags/v0.4.0.tar.gz"
+  sha256 "fe5b8fdac96ad2f48e5ffc6cf4460d5826e0970ad9b9747d42c1bbcd7154bb5b"
   license "MIT"
 
   bottle do
